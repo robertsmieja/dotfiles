@@ -1,7 +1,28 @@
+# -*-mode:gitconfig-*- vim:ft=gitconfig
+# See https://git-scm.com/docs/git-config
+
+[apply]
+    # Detect whitespace errors when applying a patch.
+    whitespace = fix
+
+[core]
+    autocrlf = input
+{{ if eq .chezmoi.os "windows" }}
+    editor = code --wait
+{{ end }}
+    # Set comment character to something that allows mentioning issue numbers.
+    commentChar = ";"
+
+[fetch]
+    # Remove any remote-tracking references that no longer exist on the remote.
+    prune = true
+
+[pull]
+	rebase = true
+
+[rebase]
+	autoStash = true
+
 [user]
 	name = "{{ .name }}"
 	email = "{{ .email }}"
-[pull]
-	rebase = true
-[rebase]
-	autoStash = true
