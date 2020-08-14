@@ -1,0 +1,7 @@
+#! /usr/bin/env sh
+
+# Oh-My-Zsh - https://github.com/ohmyzsh/ohmyzsh#basic-installation
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" > /dev/null || true
+
+# p10k - https://github.com/romkatv/powerlevel10k#oh-my-zsh
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 2> /dev/null || true
