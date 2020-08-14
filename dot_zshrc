@@ -143,3 +143,4 @@ source $HOME/.poetry/env
 export PATH="${PATH}:${HOME}/.krew/bin"
 alias konfig="kubectl konfig"
 
+source <(chezmoi completion zsh)
