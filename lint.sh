@@ -5,7 +5,7 @@ shellcheck() {
 }
 
 getScripts() {
-	find . -name "*.sh" -or -name "*.sh.tmpl"
+	find . -name "*.sh" # -or -name "*.sh.tmpl"
 }
 
 SCRIPTS="$(getScripts)"
