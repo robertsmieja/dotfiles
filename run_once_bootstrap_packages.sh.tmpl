@@ -2,8 +2,13 @@
 
 {{ if eq .chezmoi.os "linux" -}}
   {{- if eq .chezmoi.osRelease.idLike "arch" -}}
-pacman -Q ansible > /dev/null || sudo pacman -S ansible
+pacman -Q ansible zsh > /dev/null || sudo pacman -S \
+  ansible \
+  zsh
   {{- else if eq .chezmoi.osRelease.idLike "debian" -}}
-sudo apt update && sudo apt install ansible -y
+sudo apt update && \
+  sudo apt install -y \
+  ansible \
+  zsh
   {{- end -}}
 {{ end }}
