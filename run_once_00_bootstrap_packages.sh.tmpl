@@ -1,10 +1,10 @@
 {{- if eq .chezmoi.os "linux" -}}
 #! /usr/bin/env sh
-  {{- if eq .chezmoi.osRelease.idLike "arch" -}}
+  {{- if eq .chezmoi.osRelease.idLike "arch" }}
 pacman -Q ansible zsh > /dev/null || sudo pacman -S \
   ansible \
   zsh
-  {{- else if eq .chezmoi.osRelease.idLike "debian" -}}
+  {{- else if eq .chezmoi.osRelease.idLike "debian" }}
 sudo apt update && \
   sudo apt install -y \
   ansible \
