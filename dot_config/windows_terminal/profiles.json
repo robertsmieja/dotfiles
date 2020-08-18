@@ -9,7 +9,8 @@
   "profiles": {
     "defaults": {
       // Put settings here that you want to apply to all profiles
-      "fontFace": "Hasklug Nerd Font"
+      "fontFace": "Hasklug Nerd Font",
+      "colorScheme": "One Half Dark"
     },
     "list": [
       {
