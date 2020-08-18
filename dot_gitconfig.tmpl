@@ -29,3 +29,11 @@
 [user]
 	name = "{{ .name }}"
 	email = "{{ .email }}"
+
+{{ if eq .chezmoi.os "windows" }}
+[filter "lfs"]
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+{{ end }}
