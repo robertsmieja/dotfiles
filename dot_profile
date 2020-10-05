@@ -1,3 +1,10 @@
+# Common shell aliases and env variables
+#
+# Called from:
+#   ~/.zprofile
+#   ~/.bash_profile
+#
+
 export EDITOR=/usr/bin/vim
 
 alias vi=vim
