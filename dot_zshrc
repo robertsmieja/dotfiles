@@ -83,7 +83,6 @@ gradle
 kubectl
 node
 nvm
-poetry
 python
 rust
 rustup
@@ -137,7 +136,7 @@ export PATH="${HOME}/go/bin:${PATH}"
 
 export STEAM_FRAME_FORCE_CLOSE=1
 
-source /usr/bin/virtualenvwrapper.sh
+[[ -f /usr/bin/virtualenvwrapper.sh ]] && source /usr/bin/virtualenvwrapper.sh
 
 source $HOME/.poetry/env
 

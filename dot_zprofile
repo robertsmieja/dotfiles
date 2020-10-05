@@ -6,3 +6,5 @@
 # See https://wiki.archlinux.org/index.php/Zsh#Initial_configuration
 
 [[ -f ~/.profile ]] && . ~/.profile
+
+[[ -f ~/.zshrc ]] && . ~/.zshrc
