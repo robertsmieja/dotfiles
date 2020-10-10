@@ -57,3 +57,10 @@ if (Test-Path $ProfilePath/extras.ps1) {
 # Point ripgrep to its configuration file.
 # See https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md
 $Env:RIPGREP_CONFIG_PATH = "$HOME/.ripgreprc"
+
+
+# k3d autocompletion
+if (Get-Command k3d -ErrorAction SilentlyContinue) {
+    $completions = $(k3d completion powershell)
+    Invoke-Expression ($completions -join "`n")
+}
