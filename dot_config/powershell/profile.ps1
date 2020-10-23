@@ -58,6 +58,9 @@ if (Test-Path $ProfilePath/extras.ps1) {
 # See https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md
 $Env:RIPGREP_CONFIG_PATH = "$HOME/.ripgreprc"
 
+if (Test-Path "%USERPROFILE%\.krew\bin") {
+    $Env:PATH = "%USERPROFILE%\.krew\bin;" + $Env:PATH
+}
 
 # k3d autocompletion
 if (Get-Command k3d -ErrorAction SilentlyContinue) {
