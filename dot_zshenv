@@ -1,0 +1,10 @@
+#
+# ~/.zprofile
+#
+# Used for setting user's environment variables; it should not contain commands that produce output or assume the shell is attached to a TTY. When this file exists it will always be read.
+# 
+# See https://wiki.archlinux.org/index.php/Zsh#Initial_configuration
+
+# Snap bin dir, which isn't added by default in ZSH
+# See https://askubuntu.com/a/989485
+export PATH="/snap/bin/:${PATH}"
