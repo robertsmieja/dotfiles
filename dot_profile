@@ -10,6 +10,7 @@ export EDITOR=/usr/bin/vim
 alias vi=vim
 alias python=python3
 alias konfig="kubectl konfig"
+alias krew="kubectl krew"
 
 # Language/tool bin directories
 export PATH="${HOME}/.local/bin:${PATH}"
