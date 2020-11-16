@@ -25,6 +25,22 @@ Host *
     # Disable client-side roaming support for security reasons.
     # See https://www.upguard.com/blog/fixing-the-new-openssh-roaming-bug
     UseRoaming no
+    {{ if index . "work" -}}
+    
+    # Work settings
+    CheckHostIP no
+
+    Compression yes
+
+    ForwardAgent yes
+    ForwardX11 yes
+
+    PubkeyAcceptedKeyTypes +ssh-dss
+
+    StrictHostKeyChecking no
+
+    User root
+    {{ end -}}
 
 {{ if index . "work" -}}
 Host github.com
