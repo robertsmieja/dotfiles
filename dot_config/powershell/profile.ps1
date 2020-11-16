@@ -15,17 +15,17 @@
 # -----------------------------------------------------------------------------
 
 # Setup a pretty development-oriented PowerShell prompt.
-$modules = (
-    "FastPing",
-    "posh-git",
-    "oh-my-posh",
-    "Terminal-Icons"
-)
-$modules | ForEach-Object {
-    if (Get-Module -ListAvailable -Name $_) {
-        Import-Module $_
-    }
-}
+# $modules = (
+#     "FastPing",
+#     "posh-git",
+#     "oh-my-posh",
+#     "Terminal-Icons"
+# )
+# $modules | ForEach-Object {
+#     if (Get-Module -ListAvailable -Name $_) {
+#         Import-Module $_
+#     }
+# }
 if (Get-Module -ListAvailable -Name "oh-my-posh") {
     Set-Theme Emodipt
 }
