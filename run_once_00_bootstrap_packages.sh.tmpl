@@ -1,7 +1,7 @@
 {{- if eq .chezmoi.os "linux" -}}
 #! /usr/bin/env sh
   {{- if eq .chezmoi.osRelease.idLike "arch" }}
-pacman -Q ansible zsh > /dev/null || sudo pacman -S \
+pacman -Q ansible zsh 1>&2 2> /dev/null || sudo pacman -S \
   ansible \
   zsh
   {{- else if eq .chezmoi.osRelease.idLike "debian" }}
