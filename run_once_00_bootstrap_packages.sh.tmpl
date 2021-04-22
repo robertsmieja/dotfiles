@@ -1,11 +1,13 @@
 {{- if eq .chezmoi.os "linux" -}}
 #! /usr/bin/env sh
   {{- if eq .chezmoi.osRelease.idLike "arch" }}
-pacman -Q ansible zsh 1>&2 2> /dev/null || sudo pacman -S \
+pacman -Q ansible zsh 1>&2> /dev/null || sudo pacman -S \
   ansible \
   python-virtualenvwrapper \
   zsh \
   zsh-autosuggestions
+yay -Q nerd-fonts-complete 1>&2> /dev/null || yay -S \
+ aur/nerd-fonts-complete
   {{- else if eq .chezmoi.osRelease.idLike "debian" }}
 sudo apt update && \
   sudo apt install -y \
