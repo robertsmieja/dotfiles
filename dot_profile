@@ -12,20 +12,34 @@ alias python=python3
 alias konfig="kubectl konfig"
 alias krew="kubectl krew"
 
+prepend_to_path() {
+    new_path="${1}"
+
+    if [[ -d "${new_path}" ]]; then
+        export PATH="${new_path}:${PATH}"
+    fi
+}
+
+append_to_path() {
+    new_path="${1}"
+
+    if [[ -d "${new_path}" ]]; then
+        export PATH="${PATH}:${new_path}"
+    fi
+}
+
 # Language/tool bin directories
-export PATH="${HOME}/.local/bin:${PATH}"
-export PATH="${HOME}/.poetry/bin:${PATH}"
-export PATH="${HOME}/.cargo/bin:${PATH}"
-export PATH="${HOME}/go/bin:${PATH}"
-export PATH="${PATH}:${HOME}/.krew/bin"
+prepend_to_path "${HOME}/.local/bin"
+prepend_to_path "${HOME}/.poetry/bin"
+prepend_to_path "${HOME}/.cargo/bin"
+prepend_to_path "${HOME}/go/bin"
+append_to_path "${HOME}/.krew/bin"
 
 # Local Golang install before system golang, if it exists
-if [[ -d /usr/local/go/bin/ ]]; then
-    export PATH="/usr/local/go/bin/:${PATH}"
-fi
+prepend_to_path "/usr/local/go/bin/"
 
 # General bin directory
-export PATH="${HOME}/bin/:${PATH}"
+prepend_to_path "${HOME}/bin/"
 
 # Tool init scripts
 export NVM_DIR="${HOME}/.nvm"
