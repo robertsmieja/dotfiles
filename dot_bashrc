@@ -8,6 +8,9 @@
 
 [[ $- != *i* ]] && return
 
+# source common code between shells
+[[ -f ~/.profile ]] && . ~/.profile
+
 colors() {
 	local fgc bgc vals seq0
 
