@@ -11,7 +11,8 @@ ZSH will load the following files, in order:
 
 Bash will load the following files in order:
 1. $HOME/.bash_profile
-  1. $HOME/.profile
+  1. $HOME/.bashrc
+    1. $HOME/.profile
 1. $HOME/.bashrc
   1. $HOME/.profile
 
