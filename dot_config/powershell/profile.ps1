@@ -58,18 +58,18 @@ if (Test-Path $ProfilePath/extras.ps1) {
 # See https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md
 $Env:RIPGREP_CONFIG_PATH = "$HOME/.ripgreprc"
 
-if (Test-Path "%USERPROFILE%\bin") {
-    $Env:PATH += ";%USERPROFILE%\bin"
+if (Test-Path "${Env:USERPROFILE}\bin") {
+    $Env:PATH += ";${Env:USERPROFILE}\bin"
 }
 
-if (Test-Path "%USERPROFILE%\.krew\bin") {
-    $Env:PATH += ";%USERPROFILE%\.krew\bin"
+if (Test-Path "${Env:USERPROFILE}\.krew\bin") {
+    $Env:PATH += ";${Env:USERPROFILE}\.krew\bin"
 }
 
 # SOPS config
-if (Test-Path "%USERPROFILE%\sops\keys.txt") {
+if (Test-Path "${Env:USERPROFILE}\sops\keys.txt") {
     $Env:SOPS_AGE_RECIPIENTS = "age1t4je0r0ttug44cel720gazwn64tzedrmzpypd77g00qu6dtnwsjszpe2v2"
-    $Env:SOPS_AGE_KEY_FILE = "%USERPROFILE%\sops\keys.txt"
+    $Env:SOPS_AGE_KEY_FILE = "${Env:USERPROFILE}\sops\keys.txt"
 }
 
 # Set VSCode as default editor
