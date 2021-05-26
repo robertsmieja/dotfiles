@@ -71,6 +71,11 @@ if (Test-Path "%USERPROFILE%\sops\keys.txt") {
     $Env:SOPS_AGE_KEY_FILE = "%USERPROFILE%\sops\keys.txt"
 }
 
+# Set VSCode as default editor
+if (Get-Command code -ErrorAction SilentlyContinue) {
+    $Env:EDITOR = "code -w"
+}
+
 # k3d autocompletion
 if (Get-Command k3d -ErrorAction SilentlyContinue) {
     $completions = $(k3d completion powershell)
