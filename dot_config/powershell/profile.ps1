@@ -66,6 +66,11 @@ if (Test-Path "%USERPROFILE%\.krew\bin") {
     $Env:PATH += ";%USERPROFILE%\.krew\bin"
 }
 
+# SOPS config
+if (Test-Path "%USERPROFILE%\sops\keys.txt") {
+    $Env:SOPS_AGE_KEY_FILE = "%USERPROFILE%\sops\keys.txt"
+}
+
 # k3d autocompletion
 if (Get-Command k3d -ErrorAction SilentlyContinue) {
     $completions = $(k3d completion powershell)
