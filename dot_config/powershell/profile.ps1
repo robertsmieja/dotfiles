@@ -68,6 +68,7 @@ if (Test-Path "%USERPROFILE%\.krew\bin") {
 
 # SOPS config
 if (Test-Path "%USERPROFILE%\sops\keys.txt") {
+    $Env:SOPS_AGE_RECIPIENTS = "age1t4je0r0ttug44cel720gazwn64tzedrmzpypd77g00qu6dtnwsjszpe2v2"
     $Env:SOPS_AGE_KEY_FILE = "%USERPROFILE%\sops\keys.txt"
 }
 
