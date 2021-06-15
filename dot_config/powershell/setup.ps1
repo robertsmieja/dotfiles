@@ -157,6 +157,11 @@ $modules = @{
 # Setup Scoop.
 # See https://github.com/lukesampson/scoop
 if ($IsWindows) {
+    $userPolicy = Get-ExecutionPolicy
+    if ($userPolicy -ne "RemoteSigned" || $userPolicy -ne "Unrestricted" || $userPolicy -ne "Bypass") {
+        Set-ExecutionPolicy -Scope User -ExecutionPolicy RemoteSigned
+    }
+
     if (!(Get-Command "scoop" -ErrorAction "Ignore")) {
         Invoke-Expression (New-Object System.Net.WebClient).DoanloadString('https://get.scoop.sh')
     }
