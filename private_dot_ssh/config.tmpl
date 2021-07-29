@@ -47,8 +47,6 @@ Host github.com
     Hostname github.com
     User git
     IdentityFile ~/.ssh/id_ed25519.work 
-{{ else if }}
-{{ if index . "" -}}}
 {{ end -}}
 
 {{ $ssh_home_config := (bitwarden "item" ".ssh/config_home").notes -}}
