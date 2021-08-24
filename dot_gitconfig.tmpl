@@ -20,18 +20,21 @@
     # Remove any remote-tracking references that no longer exist on the remote.
     prune = true
 
+[init]
+    defaultBranch = master
+
 [push]
     default = current
 
 [pull]
-	rebase = true
+    rebase = true
 
 [rebase]
-	autoStash = true
+    autoStash = true
 
 [user]
-	name = "{{ .name }}"
-	email = "{{ .email }}"
+    name = "{{ .name }}"
+    email = "{{ .email }}"
 
 {{ if eq .chezmoi.os "windows" }}
 [filter "lfs"]
