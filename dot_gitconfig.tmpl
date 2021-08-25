@@ -36,7 +36,7 @@
     name = "{{ .name }}"
     email = "{{ .email }}"
 
-{{ if eq .chezmoi.os "windows" }}
+{{ if eq .chezmoi.os "windows" "darwin" }}
 [filter "lfs"]
     process = git-lfs filter-process
     required = true
