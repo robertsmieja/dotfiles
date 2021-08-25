@@ -91,6 +91,9 @@ virtualenvwrapper
 # zsh-autosuggestions
 )
 
+# Plugin settings, need to be set before sourcing oh-my-zsh
+NVM_AUTOLOAD=1
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
