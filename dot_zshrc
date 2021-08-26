@@ -89,6 +89,7 @@ plugins=(
   rustup
   virtualenv
   virtualenvwrapper
+  yarn
   # zsh-autosuggestions
 )
 
