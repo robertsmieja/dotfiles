@@ -1,0 +1,7 @@
+{{ if index . "work" -}}
+[default]
+region = us-east-2
+{{ else -}}
+[default]
+region = us-east-1
+{{ end -}}
