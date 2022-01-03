@@ -89,6 +89,7 @@ plugins=(
   python
   rbenv
   rust
+  sdk
   virtualenv
   virtualenvwrapper
   yarn
