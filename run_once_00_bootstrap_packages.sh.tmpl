@@ -1,5 +1,6 @@
 {{- if eq .chezmoi.os "linux" -}}
 #! /usr/bin/env sh
+  {{- if index .chezmoi.osRelease "idLike" -}}
   {{- if eq .chezmoi.osRelease.idLike "arch" }}
 pacman -Q ansible zsh 1>&2> /dev/null || sudo pacman -S --noconfirm \
   ansible \
@@ -17,5 +18,6 @@ sudo apt update && \
   virtualenvwrapper \
   zsh \
   zsh-autosuggestions
+  {{- end -}}
   {{- end -}}
 {{ end }}
