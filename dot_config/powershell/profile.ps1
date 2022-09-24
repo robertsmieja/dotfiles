@@ -82,3 +82,9 @@ if (Get-Command k3d -ErrorAction SilentlyContinue) {
     $completions = $(k3d completion powershell)
     Invoke-Expression ($completions -join "`n")
 }
+
+# Python Poetry bin folder
+
+if (Get-Command poetry -ErrorAction SilentlyContinue || Test-Path "${Env:APPDATA}\Python\Scripts") {
+    $Env:PATH += ";${Env:APPDATA}\Python\Scripts"
+}
