@@ -88,3 +88,33 @@ if (Get-Command k3d -ErrorAction SilentlyContinue) {
 if (Get-Command poetry -ErrorAction SilentlyContinue || Test-Path "${Env:APPDATA}\Python\Scripts") {
     $Env:PATH += ";${Env:APPDATA}\Python\Scripts"
 }
+
+# Helper functions
+# --------------------------------------------------------------------------
+function Get-DuplicateFilesByHash {
+    param(
+        [string]$Path = "."
+    )
+
+    $hashes = @{}
+    Get-ChildItem -Path $Path -Recurse |
+    Where-Object { !$_.PSIsContainer } |
+    ForEach-Object {
+        # Calculate file hash and add to dictionary
+        $hash = Get-FileHash $_.FullName
+        if ($hashes.ContainsKey($hash.Hash)) {
+            # Output duplicates
+            $hashes[$hash.Hash] += @($_.FullName)
+        }
+        else {
+            $hashes.Add($hash.Hash, @($_.FullName))
+        }
+    }
+
+    foreach ($hash in $hashes.GetEnumerator()) {
+        if ($hash.Value.Count -gt 1) {
+            # Output duplicates
+            Write-Output ($hash.Value -join "`n")
+        }
+    }
+}
