@@ -38,7 +38,7 @@ if (Get-Module -ListAvailable -Name "oh-my-posh") {
 # -----------------------------------------------------------------------------
 
 # Determine user profile parent directory.
-$ProfilePath = Split-Path -parent $profile
+$ProfilePath = Split-Path -Parent $profile
 
 # Load alias definitions from separate configuration file.
 if (Test-Path $ProfilePath/aliases.ps1) {
@@ -84,37 +84,72 @@ if (Get-Command k3d -ErrorAction SilentlyContinue) {
 }
 
 # Python Poetry bin folder
-
 if (Get-Command poetry -ErrorAction SilentlyContinue || Test-Path "${Env:APPDATA}\Python\Scripts") {
     $Env:PATH += ";${Env:APPDATA}\Python\Scripts"
 }
 
+# fnm - fast node manager
+fnm env --use-on-cd | Out-String | Invoke-Expression
+
 # Helper functions
 # --------------------------------------------------------------------------
 function Get-DuplicateFilesByHash {
-    param(
+    [CmdletBinding()]
+    param
+    (
+        [Parameter()]
         [string]$Path = "."
     )
 
+    Write-Verbose "Scanning files in $Path"
+
     $hashes = @{}
-    Get-ChildItem -Path $Path -Recurse |
-    Where-Object { !$_.PSIsContainer } |
-    ForEach-Object {
-        # Calculate file hash and add to dictionary
-        $hash = Get-FileHash $_.FullName
-        if ($hashes.ContainsKey($hash.Hash)) {
-            # Output duplicates
-            $hashes[$hash.Hash] += @($_.FullName)
-        }
-        else {
-            $hashes.Add($hash.Hash, @($_.FullName))
+    $hashesToFileNames = @{}
+
+    $files = Get-ChildItem -Path $Path -Recurse -File
+    $totalFiles = $files.Count
+
+    for ($fileCount = 0; $fileCount -lt $totalFiles; $fileCount++) {
+        $file = $files[$fileCount]
+        $percent = ($fileCount / $totalFiles * 100)
+        Write-Progress -Activity "Scanning files" -Status "Processed $fileCount of $totalFiles files, $percent%" -PercentComplete $percent
+
+        $fileHash = Get-FileHash $file.FullName -Algorithm MD5
+
+        if ($fileHash) {
+            # have we seen this hash before?
+            if ($hashes.ContainsKey($fileHash.Hash)) {
+                # retrieve list of files
+                $fileList = $hashesToFileNames[$fileHash.Hash]
+                if ($null -eq $fileList) {
+                    $fileList = @()
+                }
+
+                # save to list of duplicate files
+                $fileList += $fileHash.Path
+                $hashesToFileNames[$fileHash.Hash] = $fileList
+            }
+            else {
+                # we have not seen this hash before
+
+                # record this file hash
+                $hashes.Add($fileHash.Hash, $null)
+            }
         }
     }
 
-    foreach ($hash in $hashes.GetEnumerator()) {
-        if ($hash.Value.Count -gt 1) {
-            # Output duplicates
-            Write-Output ($hash.Value -join "`n")
+    $duplicates = @{}
+    foreach ($entry in $hashesToFileNames.GetEnumerator()) {
+        $key = $entry.Key
+        $value = [string[]]$entry.Value
+
+        if ($value.Count -gt 1) {
+            $duplicates.Add($key, $value)
         }
     }
+
+
+    Write-Progress -Completed -Activity "Found $($duplicates.Count) sets of duplicate files"
+
+    return $duplicates      
 }
