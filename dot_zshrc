@@ -93,7 +93,8 @@ plugins=(
   virtualenv
   virtualenvwrapper
   yarn
-  # zsh-autosuggestions
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 # Plugin settings, need to be set before sourcing oh-my-zsh

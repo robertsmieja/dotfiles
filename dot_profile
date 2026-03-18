@@ -47,7 +47,7 @@ export NVM_DIR="${HOME}/.nvm"
 [ -s "${NVM_DIR}/bash_completion" ] && \. "${NVM_DIR}/bash_completion"  # This loads nvm bash_completion
 
 [[ -f /usr/bin/virtualenvwrapper.sh ]] && source /usr/bin/virtualenvwrapper.sh
-[[ -f ${HOME}/.poetry/env ]] &&  source ${HOME}/.poetry/env
+[[ -f ${HOME}/.poetry/env ]] && source ${HOME}/.poetry/env
 
 export SDKMAN_DIR="${HOME}/.sdkman"
 [[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
@@ -59,6 +59,9 @@ fi
 if [[ -d "$HOME/.okta/bin" && ":$PATH:" != *":$HOME/.okta/bin:"* ]]; then
     PATH="$HOME/.okta/bin:$PATH"
 fi
+
+# fnm - fast node manager
+command -v fnm &>/dev/null && eval "$(fnm env --use-on-cd)"
 
 # Misc
 # Steam setting override related whether clicking close minimizes to the tray or not

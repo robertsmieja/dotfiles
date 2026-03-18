@@ -6,7 +6,8 @@ pacman -Q ansible zsh 1>&2> /dev/null || sudo pacman -S --noconfirm \
   ansible \
   python-virtualenvwrapper \
   zsh \
-  zsh-autosuggestions
+  zsh-autosuggestions \
+  zsh-syntax-highlighting
 yay -Q --aur nerd-fonts-complete 1>&2> /dev/null || yay -S --aur --noconfirm \
  aur/nerd-fonts-complete
   {{- else if eq .chezmoi.osRelease.idLike "debian" }}
@@ -17,7 +18,8 @@ sudo apt update && \
   git \
   virtualenvwrapper \
   zsh \
-  zsh-autosuggestions
+  zsh-autosuggestions \
+  zsh-syntax-highlighting
   {{- end -}}
   {{- end -}}
 {{ end }}

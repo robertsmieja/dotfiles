@@ -158,12 +158,12 @@ $modules = @{
 # See https://github.com/lukesampson/scoop
 if ($IsWindows) {
     $userPolicy = Get-ExecutionPolicy
-    if ($userPolicy -ne "RemoteSigned" || $userPolicy -ne "Unrestricted" || $userPolicy -ne "Bypass") {
+    if ($userPolicy -ne "RemoteSigned" -and $userPolicy -ne "Unrestricted" -and $userPolicy -ne "Bypass") {
         Set-ExecutionPolicy -Scope User -ExecutionPolicy RemoteSigned
     }
 
     if (!(Get-Command "scoop" -ErrorAction "Ignore")) {
-        Invoke-Expression (New-Object System.Net.WebClient).DoanloadString('https://get.scoop.sh')
+        Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
     }
     if (Get-Command "scoop" -ErrorAction "Ignore") {
         Write-Host "Verifying the state of Scoop..." -ForegroundColor $ColorInfo

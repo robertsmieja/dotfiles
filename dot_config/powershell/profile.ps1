@@ -15,23 +15,15 @@
 # -----------------------------------------------------------------------------
 
 # Setup a pretty development-oriented PowerShell prompt.
-# $modules = (
-#     "FastPing",
-#     "posh-git",
-#     "oh-my-posh",
-#     "Terminal-Icons"
-# )
-# $modules | ForEach-Object {
-#     if (Get-Module -ListAvailable -Name $_) {
-#         Import-Module $_
-#     }
-# }
-if (Get-Module -ListAvailable -Name "oh-my-posh") {
-    Set-Theme Emodipt
+# oh-my-posh v3+ is installed as a binary (not a PS module).
+# See https://ohmyposh.dev/docs/installation/windows
+if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
+    oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/emodipt-extend.omp.json" | Invoke-Expression
 }
-# if (Get-Module -ListAvailable -Name "Terminal-Icons") {
-#     Set-TerminalIconsColorTheme -Name "DevBlackOps"
-# }
+
+if (Get-Module -ListAvailable -Name "Terminal-Icons") {
+    Import-Module Terminal-Icons
+}
 
 
 # Includes
@@ -89,7 +81,9 @@ if (Get-Command poetry -ErrorAction SilentlyContinue || Test-Path "${Env:APPDATA
 }
 
 # fnm - fast node manager
-fnm env --use-on-cd | Out-String | Invoke-Expression
+if (Get-Command fnm -ErrorAction SilentlyContinue) {
+    fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+}
 
 # Helper functions
 # --------------------------------------------------------------------------
